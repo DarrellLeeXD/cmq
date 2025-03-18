@@ -261,6 +261,13 @@
     </style>
 </head>
 <body>
+    <div class="popup" id="screenshot-popup">
+        <div class="popup-content">
+            <h2>📸 Don't Forget! 🥰</h2>
+            <p>Please take a screenshot of this page and send it to him hehe 😁 before clicking the <strong>Confirm</strong> button! 💖</p>
+            <button onclick="closeScreenshotPopup()">Okay, Got It! 😊</button>
+        </div>
+    </div>
     <div class="container fade-in" id="page-content">
         <div id="form-content">
             <h1>Woohoo! 🎉 Your Date is Set!</h1>
@@ -295,8 +302,9 @@
 
     <script>
             document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("final-date").textContent = localStorage.getItem("selectedDate") || "Not Set";
-            document.getElementById("final-time").textContent = localStorage.getItem("selectedTime") || "Not Set";
+                document.getElementById("screenshot-popup").style.display = "flex";
+                document.getElementById("final-date").textContent = localStorage.getItem("selectedDate") || "Not Set";
+                document.getElementById("final-time").textContent = localStorage.getItem("selectedTime") || "Not Set";
 
             const activityList = document.getElementById("final-activities");
             let selectedActivities = JSON.parse(localStorage.getItem("selectedActivities")) || [];
@@ -314,6 +322,10 @@
             });
         }
     });
+
+        function closeScreenshotPopup() {
+            document.getElementById("screenshot-popup").style.display = "none";
+        }
 
         // Function to create and animate floating hearts
         function createFloatingHearts() {
