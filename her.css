@@ -219,6 +219,93 @@ button:hover {
     margin-top: 15px;
 }
 
+/* Overlay Background */
+/* --- Popup Overlay (Dimmed Background) --- */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px); /* Smooth blur for depth */
+    background: rgba(0, 0, 0, 0.3); /* Slightly darker for contrast */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* --- Popup Box (Glassmorphism Effect) --- */
+.popup-box {
+    background: rgba(255, 255, 255, 0.2); /* Transparent white */
+    backdrop-filter: blur(20px); /* Frosted glass effect */
+    padding: 25px 35px;
+    border-radius: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.3);
+    font-family: "Poppins", sans-serif;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: slideIn 0.6s ease-in-out;
+}
+
+/* --- Aesthetic Popup Message (Chic & Minimal) --- */
+.popup-message {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.8;
+    font-style: italic;
+    color: #fff; /* White text for elegance */
+    text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5); /* Glow effect */
+}
+
+/* --- Soft Animated Button (Neon Glow Effect) --- */
+.popup-btn {
+    background: linear-gradient(135deg, #ff6b81, #ff4757);
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 15px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 0px 15px rgba(255, 107, 129, 0.6);
+    margin-top: 15px;
+}
+
+.popup-btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0px 0px 25px rgba(255, 107, 129, 1);
+}
+
+/* --- Entrance Animations for Smooth Appearance --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+
+
 
 
 
