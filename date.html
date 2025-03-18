@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pick a Date! 💖</title>
+    <link rel="stylesheet" href="her.css">
+</head>
+<body>
+    <audio id="song" autoplay loop>
+        <source src="music.mp3">
+    </audio>
+    <script>
+        window.addEventListener('click', () => {
+            document.getElementById("song").play();
+        });
+    </script>
+
+    <div class="hearts-container"></div>
+
+    <div class="container fade-in">
+        <h1>Yay! When do you want to hang out? 😊</h1>
+
+        <div class="form-box">
+            <label for="date">Pick a date:</label>
+            <input type="date" id="date">
+
+            <label for="time">Pick a time:</label>
+            <input type="time" id="time">
+        </div>
+
+        <button id="confirm-date">Confirm 💖</button>
+    </div>
+
+    <!-- Pop-up Confirmation -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h2>Date Confirmed! 🎉</h2>
+            <p>Your date: <span id="selected-date"></span></p>
+            <p>Your time: <span id="selected-time"></span></p>
+            <button id="next-step">Next Step ➡️</button>
+        </div>
+    </div>
+
+    <!-- Confetti Script -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script>
+        document.getElementById("confirm-date").addEventListener("click", function() {
+            let date = document.getElementById("date").value;
+            let time = document.getElementById("time").value;
+
+            if (date && time) {
+                // Store values in localStorage
+                localStorage.setItem("selectedDate", date);
+                localStorage.setItem("selectedTime", time);
+
+                // Show pop-up
+                document.getElementById("selected-date").textContent = date;
+                document.getElementById("selected-time").textContent = time;
+                document.getElementById("popup").style.display = "flex";
+
+                // 🎉 Confetti effect
+                startConfetti();
+            } else {
+                alert("Please pick a date and time! 🥺");
+            }
+        });
+
+        // Redirect when clicking "Next Step ➡️"
+        document.getElementById("next-step").addEventListener("click", function() {
+            window.location.href = "activities.html";
+        });
+
+        // Confetti function
+        function startConfetti() {
+            let duration = 3 * 1000; // 3 seconds
+            let animationEnd = Date.now() + duration;
+            let colors = ['#ff69b4', '#ff1493', '#ff4500', '#ff8c00', '#ffa500'];
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+
+                if (Date.now() < animationEnd) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+        }
+    </script>
+
+</body>
+</html>

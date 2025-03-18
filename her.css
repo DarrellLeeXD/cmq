@@ -1,0 +1,225 @@
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background: linear-gradient(120deg, #ff758c, #ff7eb3);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Centered Container */
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-in-out;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+}
+
+/* Form Box - Ensures time input is on a new line */
+.form-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Adds spacing between inputs */
+}
+
+/* Label Styling */
+.form-box label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Input Fields */
+input {
+    width: 85%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border: 2px solid #ff6b81;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Confirm Button */
+button {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background: #ff3658;
+}
+
+/* Smooth Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Floating Hearts Background */
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hearts-container::after {
+    content: "❤️ ❤️ ❤️ ❤️ ❤️";
+    font-size: 40px;
+    color: red;
+    position: absolute;
+    animation: floatingHearts 10s linear infinite;
+}
+
+@keyframes floatingHearts {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+/* Pop-up Confirmation Box */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    animation: popUpAnimation 0.5s ease-in-out;
+}
+
+@keyframes popUpAnimation {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.popup-content h2 {
+    color: #ff3658;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.popup-content button {
+    margin-top: 15px;
+    padding: 8px 15px;
+    background: #ff4d6d;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+.popup-content button:hover {
+    background: #ff2d4d;
+}
+
+#confirm-date {
+    margin-top: 20px; /* Adjust spacing as needed */
+    padding: 12px 20px;
+    font-size: 18px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+#confirm-date:hover {
+    transform: scale(1.1);
+    background: #ff3658;
+}
+
+/* Activities Grid */
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Individual Activity Box */
+.activity {
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.activity img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.activity p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+/* Hover Animation */
+.activity:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Selected Activity */
+.activity.selected {
+    border: 3px solid #ff3658;
+    background: #ffebef;
+}
+
+/* Add spacing below grid */
+.activities-grid + #confirm-activities {
+    margin-top: 15px;
+}
+
+
+
+
+

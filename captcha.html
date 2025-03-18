@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPTCHA</title>
+    <link rel="stylesheet" href="captcha.css">
+</head>
+<body>
+
+    <audio id="keshi" autoplay loop>
+        <source src="music2.mp3">
+    </audio>
+    <script>
+        window.addEventListener('click',()=>{
+            document.getElementById("keshi").play();
+        });
+    </script>
+
+    <h2>🤖 CAPTCHA</h2>
+    <p id="instruction">Select all parts containing: <b id="target-object"></b></p>
+
+    <div class="captcha-container">
+        <div id="captcha-grid" class="captcha-grid"></div>
+    </div>
+
+    <button id="verify-btn">Verify</button>
+
+    <script src="captcha.js"></script>
+
+</body>
+</html>

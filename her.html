@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Go Out With Me? ❤️</title>
+    <link rel="stylesheet" href="her.css">
+</head>
+
+<body>
+    <audio id="song" autoplay loop>
+        <source src="music.mp3">
+    </audio>
+    <script>
+        window.addEventListener('click',()=>{
+            document.getElementById("song").play();
+        });
+    </script>
+    <div class="container">
+        <h1>Will you go out with me? 🥰</h1>
+        <button id="yes-btn">Yes ❤️</button>
+        <button id="no-btn">No 😢</button>
+        <p id="response"></p>
+    </div>  
+
+    <script src="her.js"></script>
+</body>
+</html>

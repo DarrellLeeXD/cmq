@@ -1,0 +1,67 @@
+/* General Styling */
+body {
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    background: linear-gradient(120deg, #ff758c, #ff7eb3);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+/* Container Box */
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-in-out;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+}
+
+/* Summary Box */
+.summary-box {
+    background: #ffe3e3;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Success Message */
+.success-message {
+    background: #d4f5d4;
+    color: #2d7a2d;
+}
+
+/* Restart Button */
+button {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background: #ff3658;
+}
+
+/* Smooth Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
