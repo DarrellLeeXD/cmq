@@ -4,63 +4,188 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Confirmation 🎉</title>
-    <link rel="stylesheet" href="final.css">
-</head>
-<body>
-    <div class="container fade-in">
-        <h1>Woohoo! 🎉 Your Date is Set!</h1>
-
-        <div class="summary-box">
-            <h2>📅 Date & Time</h2>
-            <p><strong>Date:</strong> <span id="final-date"></span></p>
-            <p><strong>Time:</strong> <span id="final-time"></span></p>
-        </div>
-
-        <div class="summary-box">
-            <h2>🏆 Chosen Activities</h2>
-            <ul id="final-activities"></ul>
-        </div>
-
-        <!-- Confirm Button -->
-        <button id="confirm-button">Confirm ✅</button>
-    </div>
-
-    <!-- Confirmation Pop-up -->
-    <div class="popup" id="confirmation-popup">
-        <div class="popup-content">
-            <h2>✅ You’re All Set!</h2>
-            <p>Looking forward to an amazing time together! 💖</p>
-            <button onclick="closePopup()">Yayy 🎉</button>
-        </div>
-    </div>
-
-    <script>
-        // Retrieve stored data from previous pages
-        document.getElementById("final-date").textContent = localStorage.getItem("selectedDate") || "Not Set";
-        document.getElementById("final-time").textContent = localStorage.getItem("selectedTime") || "Not Set";
-
-        const activityList = document.getElementById("final-activities");
-        const selectedActivities = JSON.parse(localStorage.getItem("selectedActivities")) || [];
-
-        // Display chosen activities
-        selectedActivities.forEach(activityName => {
-            let listItem = document.createElement("li");
-            listItem.textContent = activityName; // Ensure activity name is displayed
-            activityList.appendChild(listItem);
-        });
-
-        // Show confirmation pop-up
-        document.getElementById("confirm-button").addEventListener("click", function() {
-            document.getElementById("confirmation-popup").style.display = "flex";
-        });
-
-        // Close pop-up
-        function closePopup() {
-            document.getElementById("confirmation-popup").style.display = "none";
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        /* General Styling */
+        body {
+            font-family: "Poppins", sans-serif;
+            text-align: center;
+            background: linear-gradient(120deg, #ff758c, #ff7eb3);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Container Box */
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: #ffe3e3;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Confirm Button */
+        #confirm-button {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        #confirm-button:hover {
+            transform: scale(1.1);
+            background: #ff3658;
+        }
+
+        /* Smooth Fade-in Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Content Fade Out */
+        .content-fade {
+            animation: fadeContent 0.8s forwards;
+        }
+
+        @keyframes fadeContent {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        /* Heart styling */
+        .heart {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            background: #ff3658;
+            transform-origin: center;
+            animation: createHeart 0.5s forwards;
+        }
+
+        /* Using before and after to create heart shape */
+        .heart:before,
+        .heart:after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: #ff3658;
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -75px;
+            left: 0;
+        }
+
+        .heart:after {
+            top: 0;
+            left: -75px;
+        }
+
+        @keyframes createHeart {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(45deg);
+                opacity: 1;
+            }
+        }
+
+        /* Heart Pulse */
+        .heart-pulse {
+            animation: pulseHeart 1.2s infinite ease-in-out;
+        }
+
+        @keyframes pulseHeart {
+            0% { transform: translate(-50%, -50%) scale(1) rotate(45deg); }
+            50% { transform: translate(-50%, -50%) scale(1.1) rotate(45deg); }
+            100% { transform: translate(-50%, -50%) scale(1) rotate(45deg); }
+        }
+
+        /* Floating Hearts */
+        .mini-heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b81;
+            transform: rotate(45deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .mini-heart:before,
+        .mini-heart:after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b81;
+            border-radius: 50%;
+        }
+
+        .mini-heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .mini-heart:after {
+            top: 0;
+            left: -10px;
+        }
+
+        .float-heart {
+            animation: floatUp 3s ease-in-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translate(0, 0) scale(0) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+                transform: translate(0, 0) scale(1) rotate(45deg);
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0.5) rotate(var(--rot));
+                opacity: 0;
+            }
+        }
+
         /* Pop-up Styling */
         .popup {
             display: none;
@@ -72,46 +197,212 @@
             background: rgba(0, 0, 0, 0.5);
             justify-content: center;
             align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
         .popup-content {
             background: white;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             text-align: center;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .popup-content button {
             margin: 10px;
-            padding: 10px;
+            padding: 10px 20px;
             border: none;
             cursor: pointer;
             font-size: 16px;
             background: #ff4081;
             color: white;
-            border-radius: 5px;
+            border-radius: 8px;
+            transition: transform 0.2s, background 0.3s;
         }
 
         .popup-content button:hover {
             background: #e91e63;
+            transform: scale(1.05);
         }
 
-        #confirm-button {
-            display: block;
-            margin: 20px auto;
-            padding: 12px 20px;
-            font-size: 18px;
-            background: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        /* Card container transition */
+        .shrink-container {
+            animation: shrinkContainer 1s forwards;
         }
 
-        #confirm-button:hover {
-            background: #218838;
+        @keyframes shrinkContainer {
+            0% {
+                max-width: 400px;
+                width: 90%;
+                height: auto;
+                padding: 30px;
+                border-radius: 15px;
+                background: white;
+            }
+            100% {
+                max-width: 0;
+                width: 0;
+                height: 0;
+                padding: 0;
+                opacity: 0;
+                border-radius: 0;
+                background: transparent;
+            }
         }
     </style>
+</head>
+<body>
+    <div class="container fade-in" id="page-content">
+        <div id="form-content">
+            <h1>Woohoo! 🎉 Your Date is Set!</h1>
 
+            <div class="summary-box">
+                <h2>📅 Date & Time</h2>
+                <p><strong>Date:</strong> <span id="final-date"></span></p>
+                <p><strong>Time:</strong> <span id="final-time"></span></p>
+            </div>
+
+            <div class="summary-box">
+                <h2>🏆 Chosen Activities</h2>
+                <ul id="final-activities"></ul>
+            </div>
+
+            <!-- Confirm Button -->
+            <button id="confirm-button">Confirm ✅</button>
+        </div>
+    </div>
+
+    <!-- The heart that will appear -->
+    <div class="heart" id="heart-shape"></div>
+
+    <!-- Confirmation Pop-up -->
+    <div class="popup" id="confirmation-popup">
+        <div class="popup-content">
+            <h2>❤️ Your Heartfelt Confirmation! ❤️</h2>
+            <p>Your date is locked in! Get ready for an amazing time. 💖</p>
+            <button onclick="closePopup()">Yayy 🎉</button>
+        </div>
+    </div>
+
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("final-date").textContent = localStorage.getItem("selectedDate") || "Not Set";
+            document.getElementById("final-time").textContent = localStorage.getItem("selectedTime") || "Not Set";
+
+            const activityList = document.getElementById("final-activities");
+            let selectedActivities = JSON.parse(localStorage.getItem("selectedActivities")) || [];
+
+            // ✅ Clear previous activities before populating the list
+            activityList.innerHTML = ""; 
+
+            // ✅ Ensure only 9 activities are displayed
+            selectedActivities.slice(0, 9).forEach(activityName => {
+                let listItem = document.createElement("li");
+                listItem.textContent = activityName;
+                activityList.appendChild(listItem);
+            });
+        });
+
+        // Function to create and animate floating hearts
+        function createFloatingHearts() {
+            const heartCenter = document.getElementById("heart-shape");
+            const heartRect = heartCenter.getBoundingClientRect();
+            const centerX = heartRect.left + heartRect.width / 2;
+            const centerY = heartRect.top + heartRect.height / 2;
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement("div");
+                heart.classList.add("mini-heart");
+                
+                // Random direction and distance
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 100 + Math.random() * 150;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance - 100; // Bias upward
+                const rotation = Math.random() * 90; // Random rotation
+                
+                // Set custom properties for the animation
+                heart.style.setProperty('--tx', `${tx}px`);
+                heart.style.setProperty('--ty', `${ty}px`);
+                heart.style.setProperty('--rot', `${rotation}deg`);
+                
+                // Position at heart center initially
+                heart.style.left = `${centerX}px`;
+                heart.style.top = `${centerY}px`;
+                
+                // Random color shade
+                const colors = ['#ff6b81', '#ff4757', '#ff5e57', '#ff4d6d', '#f368e0'];
+                heart.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Apply same color to pseudo-elements
+                heart.style.setProperty('--heart-color', colors[Math.floor(Math.random() * colors.length)]);
+                
+                document.body.appendChild(heart);
+                
+                // Trigger animation with staggered delay
+                setTimeout(() => {
+                    heart.classList.add("float-heart");
+                }, i * 200);
+                
+                // Remove heart after animation
+                setTimeout(() => {
+                    if (heart.parentNode === document.body) {
+                        document.body.removeChild(heart);
+                    }
+                }, 3000 + i * 200);
+            }
+        }
+
+        // Confirm button event listener
+        document.getElementById("confirm-button").addEventListener("click", function() {
+            const container = document.getElementById("page-content");
+            const content = document.getElementById("form-content");
+            const heart = document.getElementById("heart-shape");
+            
+            // Fade out content first
+            content.classList.add("content-fade");
+            
+            // Wait a moment then shrink the container
+            setTimeout(() => {
+                container.classList.add("shrink-container");
+                
+                // After container shrinks, show the heart
+                setTimeout(() => {
+                    heart.style.display = "block";
+                    
+                    // After heart appears, add pulse effect and create floating hearts
+                    setTimeout(() => {
+                        heart.classList.add("heart-pulse");
+                        createFloatingHearts();
+                        
+                        // Show popup with delay for better visual flow
+                        setTimeout(() => {
+                            document.getElementById("confirmation-popup").style.display = "flex";
+                        }, 1000);
+                    }, 500);
+                }, 1000);
+            }, 800);
+        });
+
+        // Close pop-up
+        function closePopup() {
+            document.getElementById("confirmation-popup").style.display = "none";
+        }
+
+        // Apply the same heart color to pseudo-elements
+        document.querySelectorAll('.mini-heart').forEach(heart => {
+            const color = heart.style.background;
+            heart.style.setProperty('--heart-color', color);
+        });
+    </script>
 </body>
 </html>
