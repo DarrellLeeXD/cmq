@@ -304,13 +304,16 @@
             // ✅ Clear previous activities before populating the list
             activityList.innerHTML = ""; 
 
-            // ✅ Ensure only 9 activities are displayed
-            selectedActivities.slice(0, 9).forEach(activityName => {
+            if (selectedActivities.length === 0) {
+            activityList.innerHTML = "<li>No activities selected</li>";
+            } else {
+            selectedActivities.forEach(activityName => {
                 let listItem = document.createElement("li");
                 listItem.textContent = activityName;
                 activityList.appendChild(listItem);
             });
-        });
+        }
+    });
 
         // Function to create and animate floating hearts
         function createFloatingHearts() {
