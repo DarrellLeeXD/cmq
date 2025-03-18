@@ -17,7 +17,7 @@ function loadCaptcha() {
     instructionText.textContent = image.object; // Update prompt
 
     let img = new Image();
-    img.src = `images/${image.src}`;
+    img.src = image.src;
     img.onload = function () {
         for (let i = 0; i < 9; i++) {  // 3x3 grid
             let cell = document.createElement("div");
