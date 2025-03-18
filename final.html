@@ -40,21 +40,59 @@
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
         }
 
+        /* Button Container - Centered in White Space */
+        .button-container {
+            display: flex;
+            justify-content: space-around; /* Evenly distributes buttons */
+            align-items: center;
+            padding: 15px 0; /* Adds spacing above & below */
+            background: white; /* Matches the box background */
+            border-radius: 10px; /* Soft edges */
+        }
+
+        /* Send Button */
+        #send-button {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 2px solid #e1306c;
+            border-radius: 8px;
+            padding: 8px 15px;
+            text-decoration: none;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        #send-button:hover {
+            transform: scale(1.05);
+        }
+
+        #send-button img {
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+        }
+
+        #send-button span {
+            font-size: 14px;
+            color: #e1306c;
+            font-weight: bold;
+        }
+
         /* Confirm Button */
         #confirm-button {
-            background: #ff4d6d;
+            background-color: #ff4d6d;
             color: white;
             border: none;
-            padding: 12px 20px;
-            font-size: 18px;
+            padding: 13px 20px;
             border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
+            font-size: 14px;
+            transition: background-color 0.2s ease-in-out;
         }
 
         #confirm-button:hover {
-            transform: scale(1.1);
-            background: #ff3658;
+            transform: scale(1.05);
+            background-color: #e63950;
         }
 
         /* Smooth Fade-in Animation */
@@ -261,6 +299,14 @@
     </style>
 </head>
 <body>
+    <audio id="songs" autoplay loop>
+        <source src="music3.mp3">
+    </audio>
+    <script>
+        window.addEventListener('click',()=>{
+            document.getElementById("songs").play();
+        });
+    </script>
     <div class="popup" id="screenshot-popup">
         <div class="popup-content">
             <h2>📸 Don't Forget! 🥰</h2>
@@ -282,11 +328,16 @@
                 <h2>🏆 Chosen Activities</h2>
                 <ul id="final-activities"></ul>
             </div>
-
-            <!-- Confirm Button -->
-            <button id="confirm-button">Confirm ✅</button>
-        </div>
-    </div>
+            <div class="button-container">
+                <!-- Send Button (Image + Text) -->
+                <a href="https://www.instagram.com/darrell_lee_xd/" target="_blank" id="send-button">
+                    <img src="instagram.png" alt="Instagram">
+                    <span>Send to Him 😎</span>
+                </a>
+            
+                <!-- Confirm Button -->
+                <button id="confirm-button">Confirm ✅</button>
+            </div>
 
     <!-- The heart that will appear -->
     <div class="heart" id="heart-shape"></div>
@@ -301,6 +352,10 @@
     </div>
 
     <script>
+            document.getElementById("send-button").addEventListener("click", function() {
+                window.open("https://www.instagram.com/darrell_lee_xd/", "_blank");
+        });
+
             document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("screenshot-popup").style.display = "flex";
                 document.getElementById("final-date").textContent = localStorage.getItem("selectedDate") || "Not Set";
