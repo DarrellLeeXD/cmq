@@ -63,86 +63,98 @@
         <button id="confirm-activities">Confirm Selection 💖</button>
     </div>
 
-    <!-- Pop-up Warning -->
-    <div class="popup" id="popup">
+        <!-- "CHILL CHILL" Warning Popup (3rd activity) -->
+    <div class="popup" id="popup-chill">
         <div class="popup-content">
-            <h2>CHILL CHILL, won’t that be too much for the first date? 🤔</h2>
-            <p>HOWEVER, further selections can be taken into consideration as well hehe! 😎</p>
-            <button onclick="closePopup()">Okie 👍</button>
+            <h2>CHILL CHILL 🤚🏻</h2>
+            <p>Ain’t that too much for a first date? 🤔</p>
+            <p>HOWEVER, further selections can be taken into consideration as well HEHE 😝.</p>
+            <button onclick="closeChillPopup()">OKIE ✅</button>
         </div>
     </div>
 
+        <!-- "WHO ASKED?" Popup (6th activity) -->
+        <div class="popup" id="popup-who-asked">
+            <div class="popup-content">
+            <h2>DATS CRAZYYY</h2>
+            <img src="dats_crazy.PNG" alt="Who Asked?" style="width: 100%; border-radius: 10px;">
+            <button onclick="closeWhoAskedPopup()">OKIE ✅</button>
+        </div>
+    </div>
+
+    <!-- "GREEDY" Warning Popup (7th activity) -->
+    <div class="popup" id="popup-greedy">
+        <div class="popup-content">
+            <h2>HMM... That's a lil greedy 🤭</h2>
+            <p>But it isn’t impossible as well! We can always go for a second one if you don’t mind. 😉</p>
+            <button onclick="closeGreedyPopup()">OKIE ✅</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Popup -->
+    <div class="popup" id="popup-confirmation">
+        <div class="popup-content">
+            <h2>Confirmation 🎉</h2>
+            <p id="popup-message"></p>
+            <button onclick="closeConfirmationPopup()">OK ✅</button>
+        </div>
+    </div>
 
     <script>
         let selectedActivities = [];
     
         function toggleSelection(activity) {
-            if (activity.classList.contains("selected")) {
-                activity.classList.remove("selected");
-                selectedActivities = selectedActivities.filter(a => a !== activity);
-            } else {
-                activity.classList.add("selected");
-                selectedActivities.push(activity.querySelector("p").textContent);
+            const activityName = activity.textContent.trim(); // Get activity name
     
-                // If selecting the 3rd activity, show "CHILL CHILL" popup
-                if (selectedActivities.length === 3) {
-                    document.getElementById("popup-chill").style.display = "flex";
-                }
+            if (selectedActivities.includes(activityName)) {
+                // Remove activity if already selected
+                selectedActivities = selectedActivities.filter(a => a !== activityName);
+                activity.classList.remove("selected");
+            } else {
+                // Add activity if not selected
+                selectedActivities.push(activityName);
+                activity.classList.add("selected");
             }
+    
+            // Show popups based on count
+            handlePopups();
+        }
+    
+        function handlePopups() {
+            document.getElementById("popup-chill").style.display = selectedActivities.length === 3 ? "flex" : "none";
+            document.getElementById("popup-greedy").style.display = selectedActivities.length === 6 ? "flex" : "none";
+            document.getElementById("popup-who-asked").style.display = selectedActivities.length === 9 ? "flex" : "none";
         }
     
         document.getElementById("confirm-activities").addEventListener("click", function () {
             if (selectedActivities.length > 0) {
                 document.getElementById("popup-message").innerHTML = 
-                    "Great! We’re going to do <strong>" + selectedActivities.length + "</strong> fun activities together! 😍";
+                    `Great! We’re going to do <strong>${selectedActivities.length}</strong> fun activities together! 😍`;
                 document.getElementById("popup-confirmation").style.display = "flex";
             } else {
-                document.getElementById("popup-message").innerHTML = 
-                    "You need to select at least one activity! 😊";
-                document.getElementById("popup-confirmation").style.display = "flex";
+                alert("You need to select at least one activity! 😊");
             }
         });
+    
+        function closeConfirmationPopup() {
+            document.getElementById("popup-confirmation").style.display = "none";
+            setTimeout(() => {
+                window.location.href = "robot.html"; 
+            }, 500);
+        }
     
         function closeChillPopup() {
             document.getElementById("popup-chill").style.display = "none";
         }
     
-        function closeConfirmationPopup() {
-            document.getElementById("popup-confirmation").style.display = "none";
-            window.location.href = "robot.html"; // Redirects to next page
+        function closeWhoAskedPopup() {
+            document.getElementById("popup-who-asked").style.display = "none";
+        }
+    
+        function closeGreedyPopup() {
+            document.getElementById("popup-greedy").style.display = "none";
         }
     </script>
-    
-
-<!-- "CHILL CHILL" Warning Popup (Appears when selecting the 3rd activity) -->
-<div class="popup" id="popup-chill">
-    <div class="popup-content">
-        <h2>CHILL CHILL 🤚🏻</h2>
-        <p>Ain’t that too much for a first date? 🤔</p>
-        <p>HOWEVER, further selections can be taken into consideration as well HEHE 😝.</p>
-        <button onclick="closeChillPopup()">OKIE ✅</button>
-    </div>
-</div>
-
-<!-- Confirmation Popup (Appears when clicking confirm button) -->
-<div class="popup" id="popup-confirmation">
-    <div class="popup-content">
-        <h2>Confirmation 🎉</h2>
-        <p id="popup-message"></p>
-        <button onclick="closeConfirmationPopup()">OK ✅</button>
-    </div>
-</div>
-
-<script>
-    document.getElementById("confirm-activities").addEventListener("click", function() {
-        if (selectedActivities.length > 0) {
-            localStorage.setItem("selectedActivities", JSON.stringify(selectedActivities.map(a => a)));
-            window.location.href = "robot.html"; // Redirect to robot verification page
-        } else {
-            alert("You need to select at least one activity! 😊");
-        }
-    });
-</script>
 
 </body>
 </html>
