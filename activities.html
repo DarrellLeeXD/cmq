@@ -128,13 +128,16 @@
     
         document.getElementById("confirm-activities").addEventListener("click", function () {
             if (selectedActivities.length > 0) {
-                document.getElementById("popup-message").innerHTML = 
-                    `Great! We’re going to do <strong>${selectedActivities.length}</strong> fun activities together! 😍`;
-                document.getElementById("popup-confirmation").style.display = "flex";
-            } else {
-                alert("You need to select at least one activity! 😊");
-            }
-        });
+            // ✅ Store selected activities in localStorage
+            localStorage.setItem("selectedActivities", JSON.stringify(selectedActivities));
+
+            document.getElementById("popup-message").innerHTML = 
+                `Great! We’re going to do <strong>${selectedActivities.length}</strong> fun activities together! 😍`;
+            document.getElementById("popup-confirmation").style.display = "flex";
+        } else {
+            alert("You need to select at least one activity! 😊");
+        }
+    });
     
         function closeConfirmationPopup() {
             document.getElementById("popup-confirmation").style.display = "none";
